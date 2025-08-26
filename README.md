@@ -76,7 +76,8 @@ The framework, however, provides a **foundation for experimenting with more adva
 
 ## Next Steps
 - Extend feature set with **fundamental and macroeconomic data**  
-- Explore **machine learning models** (e.g., random forests, gradient boosting, bayesian inference)  
+- Explore **Bayesian approaches** (e.g., Bayesian regression, probabilistic modeling with priors)
+- Backtest across multiple assets and markets.
 
 ---
 
