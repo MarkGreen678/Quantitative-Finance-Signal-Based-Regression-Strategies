@@ -1,6 +1,8 @@
 # Quantitative Finance Signal Based Regression Strategies
 This project explores whether simple technical indicators can predict stock returns.   Using Python, Yahoo Finance data, and regression models, I build and back test trading signals — momentum, volatility, and RSI — at both daily and monthly horizons.
 
+**Extension:** Bayesian Ridge Regression
+
 ---
 
 ## Contents
@@ -23,8 +25,9 @@ This project explores whether simple technical indicators can predict stock retu
 - **Momentum:** Percentage price change over a lookback window (5-day for daily, 3-month for monthly).  
 - **Volatility:** Rolling standard deviation of returns (20-day daily, 60-day aggregated for monthly).  
 - **RSI (Relative Strength Index):** Ratio of average gains to losses, lagged to avoid lookahead bias.  
-- **Models:** Linear regression (OLS) to test explanatory power of these signals.  
-
+- **Models:**
+     - Linear regression (OLS) to test explanatory power of these signals.  
+     - Bayesian Ridge Regression: Extension of OLS that places priors on coefficients, balances fit vs. regularization, and provides uncertainty estimates for predictions.
 ---
 
 ## Key Results
@@ -37,24 +40,27 @@ This project explores whether simple technical indicators can predict stock retu
 ### Monthly Horizon
 - R² improved to ~**10%**, with volatility showing some predictive power.  
 - Long-only strategy tracked buy & hold more closely, but still failed to outperform.  
-- Long/short strategy suffered from **shorting bias** in an upward-trending market.  
+- Long/short strategy suffered from **shorting bias** in an upward-trending market.
+- Bayesian Ridge Regression delivered improved performance over OLS with the addition of confidence intervals around predictions, highlighting model uncertainty.  
 
 ---
 
 ## Backtest Performance
 - **Buy & Hold (SPY):** Strongest cumulative return.  
 - **Strategy 1 (long/short):** Underperformed due to frequent shorts in a bull market.  
-- **Strategy 2 (long-only):** Reduced downside risk, but added little alpha vs. buy & hold.  
+- **Strategy 2 (long-only):** Reduced downside risk, but added little alpha vs. buy & hold.
+- **Strategy 3 (long-only, Bayesian Ridge):** Improved performance over OLS long-only, with added uncertainty intervals to highlight confidence (or lack thereof) in predictions.
 
 ---
 
 ## Take-aways
 - **Daily predictions are unreliable** due to market noise.  
 - **Longer horizons** (monthly) provide slightly better signal, but still weak.  
-- **Buy & Hold is difficult to beat** — especially for broad indices like SPY.  
+- **Buy & Hold is difficult to beat** — especially for broad indices like SPY.
+- **Bayesian Ridge** adds value by providing regularization (controls overfitting) and uncertainty estimates, helping identify when predictions are less trustworthy.
 - Improvements require:
   - More diverse features (fundamental, macro, cross-asset signals)  
-  - Nonlinear models (tree-based methods, machine learning, Bayesian approaches)  
+  - Nonlinear models (tree-based methods, machine learning)  
   - Portfolio-level strategies and risk management  
 
 ---
@@ -76,7 +82,7 @@ The framework, however, provides a **foundation for experimenting with more adva
 
 ## Next Steps
 - Extend feature set with **fundamental and macroeconomic data**  
-- Explore **Bayesian approaches** (e.g., Bayesian regression, probabilistic modeling with priors)
+- Explore more advanced **Bayesian approaches** (e.g., hierarchical priors, probabilistic modeling).
 - Backtest across multiple assets and markets.
 
 ---
